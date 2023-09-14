@@ -1,12 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bf3k7gth7j4u2"]
+[gd_scene load_steps=9 format=3 uid="uid://bf3k7gth7j4u2"]
 
 [ext_resource type="MeshLibrary" uid="uid://dpspca3ijqnma" path="res://map.tres" id="1_cq5x5"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_vbeei"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_aqlhx"]
 [ext_resource type="Texture2D" uid="uid://bat2ha23cjt4l" path="res://assets/players/foo.png" id="3_guaey"]
+[ext_resource type="Script" path="res://scripts/phase.gd" id="5_3cmpu"]
+[ext_resource type="Script" path="res://scripts/scrum.gd" id="5_52ost"]
+[ext_resource type="Script" path="res://scripts/timer.gd" id="5_q6jha"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fajre"]
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_vbeei")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.00445059, 0.99999, 0, -0.99999, -0.00445059, 0, 2.51307, -0.0205154)
@@ -35,3 +40,69 @@ texture = ExtResource("3_guaey")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("BoxShape3D_fajre")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="status" type="HBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_top = 20.0
+offset_bottom = 46.0
+grow_horizontal = 0
+
+[node name="phone" type="Label" parent="HUD/status"]
+clip_contents = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "phone: 100%"
+uppercase = true
+
+[node name="laptop" type="Label" parent="HUD/status"]
+clip_contents = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Laptop: 100%"
+uppercase = true
+
+[node name="server" type="Label" parent="HUD/status"]
+clip_contents = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Server: 100%"
+uppercase = true
+
+[node name="scrum" type="VBoxContainer" parent="HUD"]
+layout_mode = 2
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 204.0
+offset_bottom = 76.0
+script = ExtResource("5_52ost")
+
+[node name="phase" type="Label" parent="HUD/scrum"]
+clip_contents = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "scrum: planning 25%"
+uppercase = true
+script = ExtResource("5_3cmpu")
+
+[node name="sprint" type="Label" parent="HUD/scrum"]
+clip_contents = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "sprint: 0"
+uppercase = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+script = ExtResource("5_q6jha")
