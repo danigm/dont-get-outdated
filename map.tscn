@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=3 uid="uid://dlwg0vghc6qmg"]
+
+[ext_resource type="Texture2D" uid="uid://dor3kblpk26bg" path="res://assets/map/tile-02.png" id="1_4q1y1"]
+[ext_resource type="Texture2D" uid="uid://srgj5e6yluxd" path="res://assets/map/tile-01.png" id="1_dakr0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsont"]
+albedo_texture = ExtResource("1_dakr0")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ynt5a"]
+material = SubResource("StandardMaterial3D_gsont")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50vy3"]
+albedo_texture = ExtResource("1_4q1y1")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ygddn"]
+material = SubResource("StandardMaterial3D_50vy3")
+
+[node name="map" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ynt5a")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ygddn")
+skeleton = NodePath("../MeshInstance3D")
