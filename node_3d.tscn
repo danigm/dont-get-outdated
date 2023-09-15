@@ -1,14 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bf3k7gth7j4u2"]
+[gd_scene load_steps=6 format=3 uid="uid://bf3k7gth7j4u2"]
 
 [ext_resource type="MeshLibrary" uid="uid://dpspca3ijqnma" path="res://map.tres" id="1_cq5x5"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_vbeei"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="2_aqlhx"]
-[ext_resource type="Texture2D" uid="uid://bat2ha23cjt4l" path="res://assets/players/foo.png" id="3_guaey"]
-[ext_resource type="Script" path="res://scripts/phase.gd" id="5_3cmpu"]
-[ext_resource type="Script" path="res://scripts/scrum.gd" id="5_52ost"]
+[ext_resource type="PackedScene" uid="uid://dvuqropwje7md" path="res://player.tscn" id="3_8ag4l"]
+[ext_resource type="PackedScene" uid="uid://c7eumrmer76gh" path="res://hud.tscn" id="5_ixnn3"]
 [ext_resource type="Script" path="res://scripts/timer.gd" id="5_q6jha"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_fajre"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_vbeei")
@@ -24,85 +20,12 @@ data = {
 "cells": PackedInt32Array(65535, 0, 1, 65534, 2, 1, 65533, 2, 1, 65534, 3, 1, 65535, 3, 1, 0, 3, 1, 3, 3, 1, 3, 4, 1, 2, 4, 1, 1, 4, 1, 0, 4, 1, 65535, 4, 1, 65534, 4, 1, 65533, 3, 1, 65532, 1, 1, 65532, 0, 1, 65531, 0, 1, 65531, 65535, 1, 65531, 65534, 1, 65532, 65534, 1, 65532, 65533, 1, 65532, 65532, 1, 65533, 65532, 1, 65534, 65532, 1, 65534, 65533, 1, 65533, 65533, 1, 65533, 65534, 1, 65533, 65535, 1, 65532, 65535, 1, 65532, 65531, 1, 65533, 65531, 1, 65535, 65532, 1, 0, 65532, 1, 1, 65532, 1, 0, 65533, 1, 65535, 65533, 1, 0, 65534, 1, 1, 65533, 1, 2, 65533, 1, 3, 65533, 1, 4, 65533, 1, 5, 65533, 1, 5, 65534, 1, 4, 65534, 1, 4, 65535, 1, 5, 65535, 1, 5, 0, 1, 5, 1, 1, 5, 2, 1, 5, 3, 1, 4, 3, 1, 65531, 1, 1, 65531, 2, 1, 65532, 2, 1, 65532, 3, 1, 65532, 4, 1, 2, 65535, 0, 3, 1, 0, 1, 1, 0)
 }
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-axis_lock_linear_y = true
-motion_mode = 1
-script = ExtResource("2_aqlhx")
+[node name="player" parent="." instance=ExtResource("3_8ag4l")]
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.808093, 0.589055, 0, -0.589055, 0.808093, 0.31063, 4.34319, 6.53042)
-fov = 57.5884
-
-[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.435928, 0.00872207, 0.360835)
-centered = false
-texture = ExtResource("3_guaey")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-shape = SubResource("BoxShape3D_fajre")
-
-[node name="HUD" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="status" type="HBoxContainer" parent="HUD"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -400.0
-offset_top = 20.0
-offset_bottom = 46.0
-grow_horizontal = 0
-
-[node name="phone" type="Label" parent="HUD/status"]
-clip_contents = true
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-text = "phone: 100%"
-uppercase = true
-
-[node name="laptop" type="Label" parent="HUD/status"]
-clip_contents = true
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-text = "Laptop: 100%"
-uppercase = true
-
-[node name="server" type="Label" parent="HUD/status"]
-clip_contents = true
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-text = "Server: 100%"
-uppercase = true
-
-[node name="scrum" type="VBoxContainer" parent="HUD"]
-layout_mode = 2
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 204.0
-offset_bottom = 76.0
-script = ExtResource("5_52ost")
-
-[node name="phase" type="Label" parent="HUD/scrum"]
-clip_contents = true
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-text = "scrum: planning 25%"
-uppercase = true
-script = ExtResource("5_3cmpu")
-
-[node name="sprint" type="Label" parent="HUD/scrum"]
-clip_contents = true
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-text = "sprint: 0"
-uppercase = true
+[node name="HUD" parent="." instance=ExtResource("5_ixnn3")]
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 script = ExtResource("5_q6jha")
+
+[node name="Node" type="Node" parent="."]

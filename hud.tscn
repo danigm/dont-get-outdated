@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7eumrmer76gh"]
+
+[ext_resource type="Script" path="res://scripts/scrum.gd" id="1_3uho8"]
+[ext_resource type="Script" path="res://scripts/phase.gd" id="2_jrr0v"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="status" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_top = 20.0
+offset_bottom = 46.0
+grow_horizontal = 0
+
+[node name="phone" type="Label" parent="status"]
+clip_contents = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "phone: 100%"
+uppercase = true
+
+[node name="laptop" type="Label" parent="status"]
+clip_contents = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Laptop: 100%"
+uppercase = true
+
+[node name="server" type="Label" parent="status"]
+clip_contents = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Server: 100%"
+uppercase = true
+
+[node name="scrum" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 204.0
+offset_bottom = 76.0
+script = ExtResource("1_3uho8")
+
+[node name="phase" type="Label" parent="scrum"]
+clip_contents = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "scrum: planning 25%"
+uppercase = true
+script = ExtResource("2_jrr0v")
+
+[node name="sprint" type="Label" parent="scrum"]
+clip_contents = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "sprint: 0"
+uppercase = true
