@@ -12,7 +12,7 @@ motion_mode = 1
 script = ExtResource("1_3ov53")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.808093, 0.589055, 0, -0.589055, 0.808093, 0.31063, 4.34319, 6.53042)
+transform = Transform3D(1, 0, 0, 0, 0.922538, 0.385906, 0, -0.385906, 0.922538, 0, 4, 8)
 fov = 57.5884
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
