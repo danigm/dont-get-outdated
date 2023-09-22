@@ -1,25 +1,83 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlwg0vghc6qmg"]
+[gd_scene load_steps=21 format=3 uid="uid://dlwg0vghc6qmg"]
 
-[ext_resource type="Texture2D" uid="uid://dor3kblpk26bg" path="res://assets/map/tile-02.png" id="1_4q1y1"]
-[ext_resource type="Texture2D" uid="uid://srgj5e6yluxd" path="res://assets/map/tile-01.png" id="1_dakr0"]
+[ext_resource type="Texture2D" uid="uid://ygqcg8et8bvk" path="res://assets/map/map_grass.png" id="1_5fh66"]
+[ext_resource type="Texture2D" uid="uid://244hiwc71t1r" path="res://assets/map/map_tiles.png" id="1_rfgpg"]
+[ext_resource type="Texture2D" uid="uid://64v2p034udy" path="res://assets/map/map_techno.png" id="2_abp5y"]
+[ext_resource type="Texture2D" uid="uid://ctbw3elxomes0" path="res://assets/map/map_wall.png" id="3_m3dc8"]
+[ext_resource type="Texture2D" uid="uid://cvf8blm723anp" path="res://assets/map/map_water.png" id="5_fu2t0"]
+[ext_resource type="Texture2D" uid="uid://b4xilv3g5mfj3" path="res://assets/map/map_sand.png" id="6_xwh67"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsont"]
-albedo_texture = ExtResource("1_dakr0")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f13sc"]
+albedo_texture = ExtResource("1_5fh66")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ynt5a"]
-material = SubResource("StandardMaterial3D_gsont")
+[sub_resource type="PlaneMesh" id="PlaneMesh_1x46t"]
+material = SubResource("StandardMaterial3D_f13sc")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50vy3"]
-albedo_texture = ExtResource("1_4q1y1")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2sok"]
+albedo_texture = ExtResource("2_abp5y")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ygddn"]
-material = SubResource("StandardMaterial3D_50vy3")
+[sub_resource type="PlaneMesh" id="PlaneMesh_p6e82"]
+material = SubResource("StandardMaterial3D_k2sok")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8agms"]
+albedo_texture = ExtResource("1_rfgpg")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ycxuf"]
+material = SubResource("StandardMaterial3D_8agms")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jlv1m"]
+albedo_texture = ExtResource("3_m3dc8")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bu2iu"]
+material = SubResource("StandardMaterial3D_jlv1m")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jb4jc"]
+albedo_texture = ExtResource("5_fu2t0")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_prwie"]
+material = SubResource("StandardMaterial3D_jb4jc")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pf4h2"]
+friction = 4.0
+rough = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ex25s"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1uyhe"]
+albedo_texture = ExtResource("6_xwh67")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hhaqi"]
+material = SubResource("StandardMaterial3D_1uyhe")
 
 [node name="map" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_ynt5a")
+[node name="grass" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0)
+mesh = SubResource("PlaneMesh_1x46t")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_ygddn")
-skeleton = NodePath("../MeshInstance3D")
+[node name="techno" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_p6e82")
+
+[node name="tiles" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+mesh = SubResource("PlaneMesh_ycxuf")
+
+[node name="wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+mesh = SubResource("PlaneMesh_bu2iu")
+
+[node name="water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+mesh = SubResource("PlaneMesh_prwie")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="water"]
+physics_material_override = SubResource("PhysicsMaterial_pf4h2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="water/StaticBody3D"]
+shape = SubResource("BoxShape3D_ex25s")
+
+[node name="sand" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+mesh = SubResource("PlaneMesh_hhaqi")
+skeleton = NodePath("../grass")
