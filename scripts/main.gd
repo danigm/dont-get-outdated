@@ -30,3 +30,10 @@ func _on_timer_timeout():
 			sprint += 1
 
 	get_node("HUD/scrum").update(sprint, phase, phase_duration[phase], phase_time)
+
+
+func _on_player_walk(x):
+	var local = $GridMap.to_local(x)
+	var m = $GridMap.local_to_map(local)
+	var a = $GridMap.get_cell_item(m)
+	print(a)

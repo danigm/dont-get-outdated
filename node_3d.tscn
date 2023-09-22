@@ -41,3 +41,5 @@ fov = 57.5884
 
 [node name="Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.0163356, 0.999867, 0, -0.999867, 0.0163356, 3.40567, 6.10712, 5.54427)
+
+[connection signal="walk" from="Player" to="." method="_on_player_walk"]
