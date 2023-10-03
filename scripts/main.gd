@@ -14,6 +14,8 @@ func _process(delta):
 func _on_timer_timeout():
 	world.update($Timer.wait_time)
 	$HUD/scrum.update(world)
+	$HUD/status.update(world)
+	$Player.update(world)
 
 
 func _on_player_walk(x):

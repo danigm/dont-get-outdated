@@ -9,7 +9,15 @@ signal stop(Vector3i)
 @export var security = 100
 @export var server = 100
 
+@export var outdate_speed = 0.2
+@export var bug_speed = 0
+
+
 func _physics_process(delta):
+	# TODO: this is to debug, just udpate the server a bit
+	if Input.is_action_just_pressed("ui_accept"):
+		server += 10
+
 	if Input.is_action_pressed("ui_accept"):
 		$Animation.animation = "action"
 		return
@@ -57,3 +65,26 @@ func _process_mobs():
 		if object.is_in_group("mob"):
 #			# TODO: check if we're hitting to kill the mob
 			print("Collission with mob")
+
+
+func update(world):
+	# Update the player state based on the world and time passed
+	server -= outdate_speed
+	
+	if server <= 0:
+		server = 0
+		security -= bug_speed * 3
+	else:
+		# if server is outdated, the number of bugs increases
+		bug_speed = (100 - server) * 0.01
+		if bug_speed > 0:
+			security -= bug_speed
+
+	# without security the burnout grows a lot
+	if security <= 0:
+		security = 0
+		burnout += 2
+
+	if burnout >= 100:
+		# TODO: die
+		print("DIE!")
