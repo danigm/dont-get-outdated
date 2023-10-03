@@ -21,18 +21,18 @@ offset_top = 20.0
 offset_bottom = 46.0
 grow_horizontal = 0
 
-[node name="phone" type="Label" parent="status"]
+[node name="burnout" type="Label" parent="status"]
 clip_contents = true
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-text = "phone: 100%"
+text = "burnout: 0%"
 uppercase = true
 
-[node name="laptop" type="Label" parent="status"]
+[node name="security" type="Label" parent="status"]
 clip_contents = true
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-text = "Laptop: 100%"
+text = "security: 100%"
 uppercase = true
 
 [node name="server" type="Label" parent="status"]

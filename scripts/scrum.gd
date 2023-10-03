@@ -10,7 +10,12 @@ func _ready():
 func _process(delta):
 	pass
 
-func update(sprint, phase, phase_duration, phase_time):
+func update(world):
+	var sprint = world.sprint
+	var phase = world.phase
+	var phase_duration = world.phase_duration[phase]
+	var phase_time = world.phase_time
+	
 	var percentage = 0
 	if phase_time > 0:
 		percentage = (phase_time / float(phase_duration)) * 100
